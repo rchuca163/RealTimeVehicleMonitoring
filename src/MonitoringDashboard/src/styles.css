@@ -1,0 +1,86 @@
+@import 'maplibre-gl/dist/maplibre-gl.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* :root {
+  --bg: #070c15;
+  --fg: #eef1f6;
+  --muted: #5e6e82;
+  --accent: #00e68a;
+  --accent-dim: rgba(0, 230, 138, 0.12);
+  --card: rgba(10, 16, 28, 0.88);
+  --border: rgba(255, 255, 255, 0.07);
+  --warning: #ffb020;
+  --danger: #ff4757;
+  --info: #4da6ff;
+} */
+
+:root[data-theme="dark"] {
+  --bg: #070c15;
+  --fg: #eef1f6;
+  --muted: #5e6e82;
+
+  --accent: #00e68a;
+  --accent-glow: rgba(0, 230, 138, 0.25);
+  --accent-dim: rgba(0, 230, 138, 0.12);
+  --accent-base: #009e5c;
+
+  --card: rgba(10, 16, 28, 0.88);
+  --card-solid: #0a101c;
+
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(255, 255, 255, 0.14);
+
+  --input-bg: rgba(255, 255, 255, 0.04);
+  --input-focus-bg: rgba(0, 230, 138, 0.04);
+
+  --shadow-heavy: 0 8px 40px rgba(0, 0, 0, 0.5);
+  --shadow-btn: 0 2px 12px rgba(0, 0, 0, 0.3);
+
+  --status-transito: #00e68a;
+  --status-warning: #ffb020;
+  --status-danger: #ff4757;
+  --status-detenido: #4da6ff;
+
+  --popup-tip: rgba(10, 16, 28, 0.88);
+  --ctrl-icon-filter: invert(0.9);
+}
+
+:root[data-theme="light"] {
+  --bg: #f0f3f8;
+  --fg: #0f1722;
+  --muted: #64748b;
+
+  --accent: #00a35f;
+  --accent-glow: rgba(0, 163, 95, 0.18);
+  --accent-dim: rgba(0, 163, 95, 0.08);
+  --accent-base: #007a47;
+
+  --card: rgba(255, 255, 255, 0.92);
+  --card-solid: #ffffff;
+
+  --border: rgba(0, 0, 0, 0.07);
+  --border-hover: rgba(0, 0, 0, 0.13);
+
+  --input-bg: rgba(0, 0, 0, 0.035);
+  --input-focus-bg: rgba(0, 163, 95, 0.04);
+
+  --shadow-heavy: 0 8px 40px rgba(0, 0, 0, 0.1);
+  --shadow-btn: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  --status-transito: #00994d;
+  --status-warning: #ee9f00;
+  --status-danger: #cc2f3d;
+  --status-detenido: #2563eb;
+
+  --popup-tip: rgba(255, 255, 255, 0.92);
+  --ctrl-icon-filter: invert(0.2);
+}

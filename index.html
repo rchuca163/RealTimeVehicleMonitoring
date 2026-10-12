@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>SignalR Test</title>
+</head>
+<body>
+
+    <h1>SignalR Test</h1>
+
+    <p id="status">Conectando...</p>
+
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js"></script>
+
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("https://localhost:7135/hubs/monitoring")
+            .withAutomaticReconnect()
+            .build();
+
+        connection.onreconnecting(() => {
+            document.getElementById("status").textContent = "Reconectando...";
+        });
+
+        connection.onreconnected(() => {
+            document.getElementById("status").textContent = "Conectado nuevamente";
+        });
+
+        connection.onclose(() => {
+            document.getElementById("status").textContent = "Desconectado";
+        });
+
+        connection.on("TestMessage", message => {
+            console.log("Mensaje recibido:", message);
+
+            document.getElementById("status").textContent =
+                message;
+        });
+
+        connection.on("PositionUpdated", position => {
+            console.log("Posición recibida:", position);
+
+            document.getElementById("status").textContent =
+                `Vehículo ${position.vehicleId} - ` +
+                `Lat: ${position.latitude} - ` +
+                `Lng: ${position.longitude} - ` +
+                `Velocidad: ${position.speed}`;
+        });
+
+        connection.start()
+            .then(() => {
+                document.getElementById("status").textContent = "Conectado a MonitoringHub";
+            })
+            .catch(error => {
+                console.error(error);
+
+                document.getElementById("status").textContent = "Error de conexi�n";
+            });
+    </script>
+
+</body>
+</html>

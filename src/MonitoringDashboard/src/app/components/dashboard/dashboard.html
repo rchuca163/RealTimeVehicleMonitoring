@@ -1,0 +1,245 @@
+<div>
+  <app-vehicle-map
+    [vehicles]="vehicles()"
+    [darkTheme]="isDarkTheme()"
+    (vehicleSelected)="onVehicleSelected($event)"
+  />
+  
+  <header class="filter-panel" role="search" aria-label="Filtros de vehículos">
+    <div class="logo">
+      <div class="logo-icon" aria-hidden="true">
+        <i class="fas fa-route"></i>
+      </div>
+  
+      <div class="logo-text">
+        Track<span>Pro</span>
+      </div>
+    </div>
+  
+    <div class="divider" aria-hidden="true"></div>
+  
+    <div class="filter-group">
+      <div class="filter-input-wrapper">
+        <input
+          type="text"
+          class="filter-input"
+          placeholder="Vehículo..."
+          aria-label="Filtrar por patente"
+          (input)="onPlateFilterChange($event)">
+        <i class="fas fa-truck" aria-hidden="true"></i>
+      </div>
+  
+      <div class="filter-input-wrapper">
+        <input
+          type="text"
+          class="filter-input"
+          placeholder="Empresa..."
+          aria-label="Filtrar por empresa"
+          (input)="onCompanyFilterChange($event)">
+        <i class="fas fa-building" aria-hidden="true"></i>
+      </div>
+    </div>
+  
+    <div class="vehicle-count" aria-live="polite">
+      <i class="fas fa-satellite-dish" aria-hidden="true"></i>
+      <span>
+        {{ vehiclesWithPositionCount() }}
+        en mapa
+      </span>
+    </div>
+
+    <button
+      class="theme-toggle"
+      type="button"
+      aria-label="Cambiar tema"
+      (click)="toggleTheme()"
+    >
+      <i class="fas fa-moon"></i>
+      <i class="fas fa-sun"></i>
+    </button>
+  </header>
+  
+  @if (selectedVehicle()) {  
+    <aside
+      class="detail-panel"
+      role="dialog"
+      aria-label="Detalle del vehículo">
+      
+      <div class="detail-header">
+        <div>
+          <div class="detail-title">
+            {{ selectedVehicle()?.plate ?? '-' }}
+          </div>
+      
+          <div class="detail-subtitle">
+            {{ selectedVehicle()?.companyName ?? '-' }}
+          </div>
+        </div>
+      
+        <button
+          class="detail-close"
+          aria-label="Cerrar detalle"
+          (click)="closeVehicleDetail()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      
+      <div class="detail-grid">
+        <!-- Primera fila -->
+        <div class="detail-item">
+          <div class="detail-label">Estado</div>
+        
+          <div class="detail-value">
+          
+            @if (
+              !selectedVehicle()?.alarms?.panic &&
+              !selectedVehicle()?.alarms?.speeding &&
+              !selectedVehicle()?.alarms?.stopped
+            ) {
+              <span class="status-badge" [style.--status-color]="vehicleStatus.normal.color">
+                <span
+                  class="status-dot"
+                  [style.background]="vehicleStatus.normal.color">
+                </span>
+              
+                {{ vehicleStatus.normal.label }}
+              </span>
+            }
+          
+            @if (selectedVehicle()?.alarms?.panic) {
+              <span class="status-badge" [style.--status-color]="vehicleStatus.panic.color">
+                <span
+                  class="status-dot"
+                  [style.background]="vehicleStatus.panic.color">
+                </span>
+              
+                {{ vehicleStatus.panic.label }}
+              </span>
+            }
+          
+            @if (selectedVehicle()?.alarms?.speeding) {
+              <span class="status-badge" [style.--status-color]="vehicleStatus.speeding.color">
+                <span
+                  class="status-dot"
+                  [style.background]="vehicleStatus.speeding.color">
+                </span>
+              
+                {{ vehicleStatus.speeding.label }}
+              </span>
+            }
+          
+            @if (selectedVehicle()?.alarms?.stopped) {
+              <span class="status-badge" [style.--status-color]="vehicleStatus.stopped.color">
+                <span
+                  class="status-dot"
+                  [style.background]="vehicleStatus.stopped.color">
+                </span>
+              
+                {{ vehicleStatus.stopped.label }}
+              </span>
+            }
+          
+          </div>
+        </div>
+  
+        <div class="detail-item">
+          <span class="detail-label">Conductor</span>
+          <span class="detail-value">
+            Desconocido
+          </span>
+        </div>
+  
+        <div class="detail-item">
+          <span class="detail-label">Velocidad</span>
+          <span class="detail-value">
+            {{ selectedVehicle()?.speed ?? 0 }} 
+            <span class="unit-label">km/h</span>
+          </span>
+        </div>
+  
+        <div class="detail-item">
+          <span class="detail-label">Destino</span>
+          <span class="detail-value">
+            Desconocido
+          </span>
+        </div>
+        
+        <div class="detail-item detail-item-wide">
+    <div class="detail-label">Combustible</div>
+  
+    <div class="fuel-bar-wrap">
+      <div class="fuel-bar">
+        <div class="fuel-bar-fill" style="width:28%; background: var(--status-warning)"></div>
+        <div class="fuel-pct">28%</div>
+      </div>
+    </div>
+        </div>
+  
+        <!-- Segunda fila -->
+        <div class="detail-item">
+            <span class="detail-label">Latitud</span>
+            <span class="detail-value">
+              {{ formatCoordinate(selectedVehicle()?.latitude) }}
+            </span>
+        </div>
+      
+        <div class="detail-item">
+            <span class="detail-label">Longitud</span>
+            <span class="detail-value">
+              {{ formatCoordinate(selectedVehicle()?.longitude) }}
+            </span>
+        </div>
+      </div>
+    </aside>
+  }
+  
+  <nav class="legend" aria-label="Leyenda de estados">
+    <div class="legend-title">Estado del viaje</div>
+  
+    <div class="legend-item">
+      <div
+        class="legend-dot"
+        [style.background]="vehicleStatus.normal.color">
+      </div>
+      {{ vehicleStatus.normal.label }}
+    </div>
+  
+    <div class="legend-item">
+      <div
+        class="legend-dot"
+        [style.background]="vehicleStatus.speeding.color">
+      </div>
+      {{ vehicleStatus.speeding.label }}
+    </div>
+  
+    <div class="legend-item">
+      <div
+        class="legend-dot"
+        [style.background]="vehicleStatus.panic.color">
+      </div>
+      {{ vehicleStatus.panic.label }}
+    </div>
+  
+    <div class="legend-item">
+      <div
+        class="legend-dot"
+        [style.background]="vehicleStatus.stopped.color">
+      </div>
+      {{ vehicleStatus.stopped.label }}
+    </div>
+  </nav>
+  
+  @if (!isLoading() && !hasVehicles()) {
+    <div class="no-results">
+      <i class="fas fa-magnifying-glass"></i>
+      <p>No se encontraron vehículos con esos filtros</p>
+    </div>
+  }
+  
+  @if (!isLoading() && hasVehicles() && !hasVehiclesWithPosition()) {
+    <div class="no-results">
+      <i class="fas fa-location-dot"></i>
+      <p>Los vehículos encontrados aún no tienen posiciones registradas</p>
+    </div>
+  }
+</div>

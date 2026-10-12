@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2BBFBFCF-8F6B-4227-ADF2-1B349311AC34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{9329613F-62B9-42FE-A9DD-0EDE74CD1A48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Telemetry", "Telemetry", "{9DB8112B-8D9D-49B9-8D09-7C8FCEB02A3B}"
+	ProjectSection(SolutionItems) = preProject
+		src\Telemetry\README.md = src\Telemetry\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetry.Api", "src\Telemetry\Telemetry.Api\Telemetry.Api.csproj", "{D8B4FCF3-5961-43CD-970C-8B1755BED339}"
+	ProjectSection(ProjectDependencies) = postProject
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205} = {90D0A118-7DC7-47AE-BEA7-A67297ADE205}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetry.Domain", "src\Telemetry\Telemetry.Domain\Telemetry.Domain.csproj", "{6B17D35D-C4DF-4225-A45E-D36C8102FB84}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetry.Infrastructure", "src\Telemetry\Telemetry.Infrastructure\Telemetry.Infrastructure.csproj", "{7C10034C-0B56-463C-BAD2-50008919FC37}"
+	ProjectSection(ProjectDependencies) = postProject
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205} = {90D0A118-7DC7-47AE-BEA7-A67297ADE205}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Telemetry.Application", "src\Telemetry\Telemetry.Application\Telemetry.Application.csproj", "{90D0A118-7DC7-47AE-BEA7-A67297ADE205}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6B17D35D-C4DF-4225-A45E-D36C8102FB84} = {6B17D35D-C4DF-4225-A45E-D36C8102FB84}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Monitoring", "Monitoring", "{92CFAE49-AABD-47B1-9FC3-4FF57ABED7D7}"
+	ProjectSection(SolutionItems) = preProject
+		src\Monitoring\README.md = src\Monitoring\README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Monitoring.Api", "src\Monitoring\Monitoring.Api\Monitoring.Api.csproj", "{82ED1437-70DE-452F-A618-13B953754E1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SignalR.Test", "SignalR.Test", "{A15CE1FA-30A0-4F8F-8D32-2E5D755A8A07}"
+	ProjectSection(SolutionItems) = preProject
+		index.html = index.html
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "config", "config", "{4684E933-4778-4BC1-87DC-FFB7332FDB6F}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D8B4FCF3-5961-43CD-970C-8B1755BED339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B4FCF3-5961-43CD-970C-8B1755BED339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B4FCF3-5961-43CD-970C-8B1755BED339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B4FCF3-5961-43CD-970C-8B1755BED339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B17D35D-C4DF-4225-A45E-D36C8102FB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B17D35D-C4DF-4225-A45E-D36C8102FB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B17D35D-C4DF-4225-A45E-D36C8102FB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B17D35D-C4DF-4225-A45E-D36C8102FB84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C10034C-0B56-463C-BAD2-50008919FC37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C10034C-0B56-463C-BAD2-50008919FC37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C10034C-0B56-463C-BAD2-50008919FC37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C10034C-0B56-463C-BAD2-50008919FC37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82ED1437-70DE-452F-A618-13B953754E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82ED1437-70DE-452F-A618-13B953754E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82ED1437-70DE-452F-A618-13B953754E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82ED1437-70DE-452F-A618-13B953754E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9DB8112B-8D9D-49B9-8D09-7C8FCEB02A3B} = {2BBFBFCF-8F6B-4227-ADF2-1B349311AC34}
+		{D8B4FCF3-5961-43CD-970C-8B1755BED339} = {9DB8112B-8D9D-49B9-8D09-7C8FCEB02A3B}
+		{6B17D35D-C4DF-4225-A45E-D36C8102FB84} = {9DB8112B-8D9D-49B9-8D09-7C8FCEB02A3B}
+		{7C10034C-0B56-463C-BAD2-50008919FC37} = {9DB8112B-8D9D-49B9-8D09-7C8FCEB02A3B}
+		{90D0A118-7DC7-47AE-BEA7-A67297ADE205} = {9DB8112B-8D9D-49B9-8D09-7C8FCEB02A3B}
+		{92CFAE49-AABD-47B1-9FC3-4FF57ABED7D7} = {2BBFBFCF-8F6B-4227-ADF2-1B349311AC34}
+		{82ED1437-70DE-452F-A618-13B953754E1D} = {92CFAE49-AABD-47B1-9FC3-4FF57ABED7D7}
+		{A15CE1FA-30A0-4F8F-8D32-2E5D755A8A07} = {9329613F-62B9-42FE-A9DD-0EDE74CD1A48}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E576BD8-D408-4506-A02E-797E68376D3B}
+	EndGlobalSection
+EndGlobal
